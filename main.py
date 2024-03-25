@@ -23,7 +23,7 @@ button_x = (window_width - button_width) // 2
 button_y = (window_height - button_height) // 2
 
 # Chargement de l'image de fond
-background_image = pygame.image.load('foretv3.jpg').convert()
+background_image = pygame.image.load('EarthTechProject/foretv3.jpg').convert()
 
 # Redimensionnement de l'image pour qu'elle corresponde à la taille de la fenêtre
 background_image = pygame.transform.scale(background_image, (window_width, window_height))
