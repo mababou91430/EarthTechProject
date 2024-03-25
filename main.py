@@ -6,8 +6,8 @@ pygame.init()
 pygame.font.init()
 
 # Taille de la fenêtre
-window_width = 1920
-window_height = 1080
+window_width = 1020
+window_height = 1020
 
 # Création de la fenêtre
 window = pygame.display.set_mode((window_width, window_height))
@@ -17,24 +17,29 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 GRAY = (150,150,150)
 
-button_width = 100
-button_height = 70
+button_width = 200
+button_height = 150
 button_x = (window_width - button_width) // 2
-button_y = (window_height - button_height) // 2
+button_y = 700
 
 # Chargement de l'image de fond
-background_image = pygame.image.load('EarthTechProject/foretv3.jpg').convert()
+background_image = pygame.image.load('EarthTechProject/Accueil.png').convert()
 
 # Redimensionnement de l'image pour qu'elle corresponde à la taille de la fenêtre
 background_image = pygame.transform.scale(background_image, (window_width, window_height))
 
+button_surface = pygame.Surface((button_width, button_height), pygame.SRCALPHA)
+
 font = pygame.font.SysFont('arial',40)
 
-def draw_button():
-    pygame.draw.rect(background_image, GRAY, (button_x, button_y, button_width, button_height))
-    text = font.render("Quitter", True, BLACK)
-    text_rect = text.get_rect(center=(button_x + button_width // 2, button_y + button_height // 2))
-    background_image.blit(text, text_rect)
+def draw_button(button_surface):
+    pygame.draw.rect(button_surface, GRAY, (button_x, button_y, button_width, button_height))
+    button_image = pygame.image.load('EarthTechProject/button_image.png')
+    button_image = pygame.transform.scale(button_image, (button_width, button_height))
+    background_image.blit(button_image, (button_x, button_y))
+
+
+draw_button(button_surface)
 
 # Boucle principale du jeu
 running = True
