@@ -17,9 +17,9 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 GRAY = (150,150,150)
 
-button_width = 200
-button_height = 150
-button_x = (window_width - button_width) // 2
+button_width = 75
+button_height = 50
+button_x = window_width - 350
 button_y = 700
 
 # Chargement de l'image de fond
@@ -64,3 +64,4 @@ while running:
 pygame.font.quit()
 pygame.quit()
 sys.exit()
+
