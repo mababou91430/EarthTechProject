@@ -24,7 +24,7 @@ test = afficher_image()
 #button_y = 700
 
 # Chargement de l'image de fond
-#background_image = pygame.image.load('Accueil.png').convert()
+background_image = pygame.image.load('Accueil.png').convert()
 
 # Redimensionnement de l'image pour qu'elle corresponde à la taille de la fenêtre
 #background_image = pygame.transform.scale(background_image, (window_width, window_height))
