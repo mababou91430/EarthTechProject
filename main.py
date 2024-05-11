@@ -7,11 +7,11 @@ pygame.init()
 pygame.font.init()
 test = afficher_image()
 # Taille de la fenêtre
-#window_width = 1020
-#window_height = 1020
+window_width = 1020
+window_height = 1020
 
 # Création de la fenêtre
-#window = pygame.display.set_mode((window_width, window_height))
+window = pygame.display.set_mode((window_width, window_height))
 #pygame.display.set_caption("Arrière-plan avec Pygame")
 
 #BLACK = (0,0,0)
@@ -44,6 +44,7 @@ background_image = pygame.image.load('Accueil.png').convert()
 
 # Boucle principale du jeu
 running = True
+test.__init__()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -55,8 +56,10 @@ while running:
                 #print("Bouton cliqué !")  # Action à effectuer lorsque le bouton est cliqué
                 #running = False
         else:
-            test.__init__()
-
+            break
+            #background_image = pygame.image.load('Accueil.png').convert()
+            #background_image = pygame.transform.scale(background_image, (window_width, window_height))
+            #window.blit(background_image, (0, 0))
     # Affichage de l'image de fond
 
 

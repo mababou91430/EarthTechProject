@@ -16,7 +16,7 @@ class afficher_image:
         with open(image,"r") as image_set :
             ligne = image_set.readline()
             print(ligne)
-            background_image = pygame.image.load(ligne).convert()
+            background_image = pygame.image.load('Accueil.png').convert()
             background_image = pygame.transform.scale(background_image, (window_width, window_height))
             window.blit(background_image, (0, 0))
 
