@@ -13,7 +13,7 @@ window = pygame.display.set_mode((window_width, window_height))
 with open(image, "r") as image_set:
     ligne = image_set.readlines()
     tab_image = ligne[0].split(" ")
-
+ff
 
 class afficher_image:
 
