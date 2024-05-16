@@ -10,6 +10,8 @@ num_image = 0
 pygame.init()
 pygame.font.init()
 test = afficher_image(num_image)
+menu_option = ["Son, Retour, Quitter"]
+menu_accueil = bouton(menu_option)
 
 # Boucle principale du jeu
 running = True
@@ -21,16 +23,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            num_image += 1
-            test.__next__(num_image)
-            #mouse_pos = pygame.mouse.get_pos()
-            #if button_x <= mouse_pos[0] <= button_x + button_width and button_y <= mouse_pos[
-                #1] <= button_y + button_height:
-                #print("Bouton cliqué !")  # Action à effectuer lorsque le bouton est cliqué
-                #running = False
+            mouse_pos = pygame.mouse.get_pos()
+            if 50 >= mouse_pos[0] >= 150 and 50 >= mouse_pos[1] >= 100:
+                num_image += 1
+                test.__next__(num_image)
+            menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0],mouse_pos[1])
+
         elif init:
+            menu_accueil.__init__(menu_option)
             test.__init__(num_image)
             init = False
+            menu_accueil.accueil()
+
 
     # Affichage de l'image de fond
 
