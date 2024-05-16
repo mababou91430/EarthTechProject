@@ -4,9 +4,9 @@ import sys
 pygame.init()
 pygame.font.init()
 BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+WHITE = (255, 255, 255, 128)
 GRAY = (150, 150, 150)
-image = 'EarthTechProject/Image.txt'
+image = 'Image.txt'
 window_width = 1020
 window_height = 1020
 
@@ -14,15 +14,20 @@ font = pygame.font.SysFont(None, 36)
 
 # Création de la fenêtre
 window = pygame.display.set_mode((window_width, window_height))
+
 with open(image, "r") as image_set:
     ligne = image_set.readlines()
     tab_image = ligne[0].split(" ")
 
 def draw_text(text, font, color, surface, x, y):
+    pygame.draw.rect(surface, GRAY,(x-5, y, 55, 25))
+    pygame.draw.rect(surface, GRAY, (x+55, y, 85, 25))
+    #pygame.draw.rect(surface, GRAY, (x, y, 235, 50))
     text_obj = font.render(text, True, color)
     text_rect = text_obj.get_rect()
     text_rect.topleft = (x, y)
     surface.blit(text_obj, text_rect)
+
 
 class afficher_image:
 
@@ -64,8 +69,8 @@ class bouton:
 
     def draw(self, surface):
         for index, item in enumerate(self.items):
-            draw_text(item, font, BLACK, surface, 50, 200 + index*50)
+            pygame.draw.rect(surface, (255, 0, 0, 128), (255, (200 + index*50)-10, (window_width + index*50)//2, 200 + index*50))
+            draw_text(item, font, BLACK, surface, ((window_width//2)-120), 200 + index*50)
 
     def bouton_clicker(self,menu_accueil, x, y):
-        if 50 <= x <= 150 and 50 <= y <= 100:
-                menu_accueil.draw(window)
+            menu_accueil.draw(window)

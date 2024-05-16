@@ -10,7 +10,7 @@ num_image = 0
 pygame.init()
 pygame.font.init()
 test = afficher_image(num_image)
-menu_option = ["Son, Retour, Quitter"]
+menu_option = ["Son  Retour  Quitter"]
 menu_accueil = bouton(menu_option)
 
 # Boucle principale du jeu
@@ -24,9 +24,8 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if 50 >= mouse_pos[0] >= 150 and 50 >= mouse_pos[1] >= 100:
-                num_image += 1
-                test.__next__(num_image)
+            #num_image += 1
+            #test.__next__(num_image)
             menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0],mouse_pos[1])
 
         elif init:
