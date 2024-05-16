@@ -27,3 +27,7 @@ class afficher_image:
         background_image = pygame.image.load(tab_image[num_image]).convert()
         background_image = pygame.transform.scale(background_image, (window_width, window_height))
         window.blit(background_image, (0, 0))
+
+class bouton:
+
+    def accueil(self):
