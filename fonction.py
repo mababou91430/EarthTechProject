@@ -23,11 +23,7 @@ with open(image, "r") as image_set:
 volume = 50
 pygame.mixer.music.set_volume(volume / 100)
 
-def dessiner_curseur(rect):
-    pygame.draw.rect(window, GRAY, rect)
-    pygame.draw.rect(window, WHITE,(window.x, window.y, window.width * (volume / 100), window.height))
-
-def draw_text(text, font, color, surface, x, y):
+def draw_text(text, font, color, surface, x, y, rect):
     pygame.draw.rect(surface, GRAY, (x-5-90, y, 55, 25))
     pygame.draw.rect(surface, GRAY, (x+55, y, 85, 25))
     pygame.draw.rect(surface, GRAY, (x+145+90, y, 100, 25))
@@ -35,7 +31,8 @@ def draw_text(text, font, color, surface, x, y):
     text_rect = text_obj.get_rect()
     text_rect.topleft = (x-90, y)
     surface.blit(text_obj, text_rect)
-
+    pygame.draw.rect(surface, GRAY, (275, 240, 100, 20))
+    pygame.draw.rect(surface, WHITE, (275, 240, 100*(volume / 100),20))
 
 
 class afficher_image:
@@ -77,16 +74,16 @@ class bouton:
         bouton_start_image = pygame.transform.scale(bouton_start_image, (taille_bouton_x, taille_bouton_y))
         window.blit(bouton_start_image, (pos_bouton_x-150, pos_bouton_y))
 
-    def draw(self, surface):
+    def draw(self, surface, rect):
         for index, item in enumerate(self.items):
             pygame.draw.rect(surface, (255, 0, 0, 128), (255, (200 + index*50)-10, (window_width + index*50)//2, 200 + index*50))
-            draw_text(item, font, BLACK, surface, ((window_width//2)-120), 200 + index*50)
+            draw_text(item, font, BLACK, surface, ((window_width//2)-120), 200 + index*50, rect)
 
-    def bouton_clicker(self, menu_accueil, x, y, num_image, menu1):
+    def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
         print(num_image, " , ", x, " , ", y, " , ", menu1)
         if (num_image == 0 and pos_bouton_x <= x <= pos_bouton_x+150 and pos_bouton_y <= y <= pos_bouton_y+50
                 and menu1 == 0):
-            menu_accueil.draw(window)
+            menu_accueil.draw(window, rect)
             menu1 += 1
             print("test2")
             return menu1
