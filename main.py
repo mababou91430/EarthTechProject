@@ -5,6 +5,7 @@ from pygame import *
 import sys
 
 num_image = 0
+menu = 0
 
 # Initialisation de Pygame
 pygame.init()
@@ -26,7 +27,7 @@ while running:
             mouse_pos = pygame.mouse.get_pos()
             #num_image += 1
             #test.__next__(num_image)
-            menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0],mouse_pos[1])
+            menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0],mouse_pos[1],num_image,menu)
 
         elif init:
             menu_accueil.__init__(menu_option)
