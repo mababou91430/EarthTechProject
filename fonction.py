@@ -1,4 +1,5 @@
 import pygame
+import pygame.mixer
 
 pygame.init()
 pygame.font.init()
@@ -19,14 +20,22 @@ with open(image, "r") as image_set:
     tab_image = ligne[0].split(" ")
 
 
+volume = 50
+pygame.mixer.music.set_volume(volume / 100)
+
+def dessiner_curseur(rect):
+    pygame.draw.rect(window, GRAY, rect)
+    pygame.draw.rect(window, WHITE,(window.x, window.y, window.width * (volume / 100), window.height))
+
 def draw_text(text, font, color, surface, x, y):
-    pygame.draw.rect(surface, GRAY, (x-5, y, 55, 25))
+    pygame.draw.rect(surface, GRAY, (x-5-90, y, 55, 25))
     pygame.draw.rect(surface, GRAY, (x+55, y, 85, 25))
-    pygame.draw.rect(surface, GRAY, (x+145, y, 100, 25))
+    pygame.draw.rect(surface, GRAY, (x+145+90, y, 100, 25))
     text_obj = font.render(text, True, color)
     text_rect = text_obj.get_rect()
-    text_rect.topleft = (x, y)
+    text_rect.topleft = (x-90, y)
     surface.blit(text_obj, text_rect)
+
 
 
 class afficher_image:
@@ -81,12 +90,14 @@ class bouton:
             menu1 += 1
             print("test2")
             return menu1
-        elif num_image == 0 and menu1 == 1 and 448 <= x <= 530 and 200 <= y <= 200+25:
+        elif num_image == 0 and menu1 == 1 and 445 <= x <= 530 and 200 <= y <= 200+25:
             print("test1")
             afficher_image.__init__(self, 0)
             bouton.accueil(self)
             menu1 -= 1
             return menu1
+        elif num_image == 0 and menu1 == 1 and 625 <= x <= 725 and 200 <= y <= 225:
+            return 2
         else:
             if menu1 == 1:
                 return 1
