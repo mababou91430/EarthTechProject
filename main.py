@@ -29,8 +29,9 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            #num_image += 1
-            #test.__next__(num_image)
+            if num_image != 0:
+                num_image += 1
+                test.__next__(num_image)
             menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
             if curseur_rect.collidepoint(event.pos):
                 curseur_saisie = True
@@ -45,7 +46,10 @@ while running:
             running = False
         elif menu == 1:
             menu_accueil.draw(window, rect)
-            print("test 3")
+        elif menu == 3:
+            num_image += 1
+            test.__next__(num_image)
+            menu = 0
         elif init:
             menu_accueil.__init__(menu_option)
             test.__init__(num_image)

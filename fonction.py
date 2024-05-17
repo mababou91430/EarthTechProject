@@ -81,7 +81,7 @@ class bouton:
 
     def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
         print(num_image, " , ", x, " , ", y, " , ", menu1)
-        if (num_image == 0 and pos_bouton_x <= x <= pos_bouton_x+150 and pos_bouton_y <= y <= pos_bouton_y+50
+        if (num_image == 0 and pos_bouton_x <= x <= 575 and pos_bouton_y <= y <= pos_bouton_y+50
                 and menu1 == 0):
             menu_accueil.draw(window, rect)
             menu1 += 1
@@ -95,6 +95,10 @@ class bouton:
             return menu1
         elif num_image == 0 and menu1 == 1 and 625 <= x <= 725 and 200 <= y <= 225:
             return 2
+        elif num_image == 0 and menu1 == 0 and 600 <= x <= 725 and 770 <= y <= 800:
+            return 2
+        elif num_image == 0 and menu1 == 0 and 300 <= x <= 420 and 770 <= y <= 800:
+            return 3
         else:
             if menu1 == 1:
                 return 1
