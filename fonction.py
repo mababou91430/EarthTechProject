@@ -6,7 +6,7 @@ pygame.font.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255, 128)
 GRAY = (150, 150, 150)
-image = 'EarthTechProject/Image.txt'
+image = 'Image.txt'
 window_width = 1020
 window_height = 1020
 
@@ -49,7 +49,7 @@ class afficher_image:
         window.blit(background_image, (0, 0))
 
 
-bouton_exit = 'EarthTechProject/Image/Exit.png'
+bouton_exit = 'Image/Exit.png'
 
 taille_bouton_x = 126
 taille_bouton_y = 50

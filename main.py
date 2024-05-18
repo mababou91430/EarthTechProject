@@ -1,6 +1,7 @@
-import pygame
+
 
 from fonction import *
+from Musique import *
 from pygame import *
 import sys
 
@@ -17,6 +18,9 @@ pygame.font.init()
 test = afficher_image(num_image)
 menu_option = ["Son               Retour               Quitter"]
 menu_accueil = bouton(menu_option)
+music_path = "chemin/vers/votre/musique.mp3"
+pygame.mixer.music.load(music_path)
+pygame.mixer.music.play(-1)
 
 # Boucle principale du jeu
 running = True
