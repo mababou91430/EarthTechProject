@@ -20,8 +20,63 @@ with open(image, "r") as image_set:
     tab_image = ligne[0].split(" ")
 
 
-volume = 50
-pygame.mixer.music.set_volume(volume / 100)
+class Game:
+    def __init__(self):
+        self.screen = window
+        self.clock = pygame.time.Clock()
+        self.running = True
+
+        # Charger la musique
+        self.music_path = "musique/Falling In Reverse - Ronald.mp3"
+        pygame.mixer.music.load(self.music_path)
+        pygame.mixer.music.play(-1)  # Joue la musique en boucle
+
+        # Créer le curseur de volume
+        self.volume_slider = VolumeSlider(275, 250, 100, 20)
+
+    def run(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            self.volume_slider.handle_event(event)
+
+        # Mettre à jour le volume de la musique
+        pygame.mixer.music.set_volume(self.volume_slider.get_volume())
+
+        # Dessiner
+        self.volume_slider.draw(self.screen)
+        pygame.display.flip()
+        self.clock.tick(60)
+
+
+class VolumeSlider:
+    def __init__(self, x, y, width, height, initial_volume=20):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.volume = initial_volume
+        self.knob_rect = pygame.Rect(x + (initial_volume / 100) * width, y, 10, height)
+        self.dragging = False
+
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.knob_rect.collidepoint(event.pos):
+                self.dragging = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.dragging = False
+        elif event.type == pygame.MOUSEMOTION:
+            if self.dragging:
+                self.knob_rect.x = min(max(self.rect.x, event.pos[0]), self.rect.x + self.rect.width - self.knob_rect.width)
+                self.volume = ((self.knob_rect.x - self.rect.x) / self.rect.width) * 100
+
+    def draw(self, surface):
+        pygame.draw.rect(surface, (169, 169, 169), self.rect)
+        pygame.draw.rect(surface, (255, 0, 0), self.knob_rect)
+
+    def get_volume(self):
+        return self.volume / 100
+
+
+musique = Game()
+
 
 def draw_text(text, font, color, surface, x, y, rect):
     pygame.draw.rect(surface, GRAY, (x-5-90, y, 55, 25))
@@ -31,8 +86,6 @@ def draw_text(text, font, color, surface, x, y, rect):
     text_rect = text_obj.get_rect()
     text_rect.topleft = (x-90, y)
     surface.blit(text_obj, text_rect)
-    pygame.draw.rect(surface, GRAY, (275, 240, 100, 20))
-    pygame.draw.rect(surface, WHITE, (275, 240, 100*(volume / 100),20))
 
 
 class afficher_image:
@@ -99,8 +152,12 @@ class bouton:
             return 2
         elif num_image == 0 and menu1 == 0 and 300 <= x <= 420 and 770 <= y <= 800:
             return 3
+        elif num_image == 0 and menu1 == 1 and 275 <= x <= 375 and 250 <= y <= 270:
+            musique.run()
         else:
             if menu1 == 1:
                 return 1
             else:
                 return 0
+
+

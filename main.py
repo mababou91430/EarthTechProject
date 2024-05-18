@@ -1,7 +1,6 @@
 
 
 from fonction import *
-from Musique import *
 from pygame import *
 import sys
 
@@ -18,9 +17,7 @@ pygame.font.init()
 test = afficher_image(num_image)
 menu_option = ["Son               Retour               Quitter"]
 menu_accueil = bouton(menu_option)
-music_path = "chemin/vers/votre/musique.mp3"
-pygame.mixer.music.load(music_path)
-pygame.mixer.music.play(-1)
+musique = Game()
 
 # Boucle principale du jeu
 running = True
@@ -37,15 +34,6 @@ while running:
                 num_image += 1
                 test.__next__(num_image)
             menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
-            if curseur_rect.collidepoint(event.pos):
-                curseur_saisie = True
-        elif event.type == pygame.MOUSEBUTTONUP:
-            curseur_saisie = False
-        elif event.type == pygame.MOUSEMOTION:
-            if curseur_saisie:
-                curseur_rect.x = min(max(350-75, event.pos[0]), 450)  # Limite le curseur dans la barre
-                volume = (curseur_rect.x - 350-75) / 100 * 100  # Convertit la position du curseur en volume
-                pygame.mixer.music.set_volume(volume / 100)
         if menu == 2:
             running = False
         elif menu == 1:
@@ -55,10 +43,12 @@ while running:
             test.__next__(num_image)
             menu = 0
         elif init:
+            musique.__init__()
             menu_accueil.__init__(menu_option)
             test.__init__(num_image)
             init = False
             menu_accueil.accueil()
+
 
 
     # Affichage de l'image de fond
