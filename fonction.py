@@ -4,7 +4,7 @@ pygame.font.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (150, 150, 150)
-image = 'EarthTechProject/Image.txt'
+image = 'Image.txt'
 window_width = 1020
 window_height = 1020
 
