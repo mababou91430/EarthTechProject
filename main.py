@@ -1,15 +1,23 @@
-import pygame
+
 
 from fonction import *
 from pygame import *
 import sys
 
 num_image = 0
+menu = 0
+curseur_saisie = False
+curseur_rect = pygame.Rect(350, 300, 100, 20)
+
+window = pygame.display.set_mode((window_width, window_height))
 
 # Initialisation de Pygame
 pygame.init()
 pygame.font.init()
 test = afficher_image(num_image)
+menu_option = ["Son               Retour               Quitter"]
+menu_accueil = bouton(menu_option)
+musique = Game()
 
 # Boucle principale du jeu
 running = True
@@ -21,16 +29,27 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+            if num_image != 0:
+                num_image += 1
+                test.__next__(num_image)
+            menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
+        if menu == 2:
+            running = False
+        elif menu == 1:
+            menu_accueil.draw(window, rect)
+        elif menu == 3:
             num_image += 1
             test.__next__(num_image)
-            #mouse_pos = pygame.mouse.get_pos()
-            #if button_x <= mouse_pos[0] <= button_x + button_width and button_y <= mouse_pos[
-                #1] <= button_y + button_height:
-                #print("Bouton cliqué !")  # Action à effectuer lorsque le bouton est cliqué
-                #running = False
+            menu = 0
         elif init:
+            musique.__init__()
+            menu_accueil.__init__(menu_option)
             test.__init__(num_image)
             init = False
+            menu_accueil.accueil()
+
+
 
     # Affichage de l'image de fond
 
