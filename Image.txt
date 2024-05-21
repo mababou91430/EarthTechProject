@@ -1,1 +1,1 @@
-Accueil.png EarthTechProject/Image/1.png EarthTechProject/Image/2.png EarthTechProject/Image/3.jfif EarthTechProject/Image/4.jfif EarthTechProject/Image/5.jfif EarthTechProject/Image/7.jfif
+EarthTechProject/Accueil.png EarthTechProject/Image/1.png EarthTechProject/Image/2.png EarthTechProject/Image/3.jfif EarthTechProject/Image/4.jfif EarthTechProject/Image/5.jfif EarthTechProject/Image/7.jfif
