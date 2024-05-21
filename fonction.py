@@ -161,3 +161,14 @@ class bouton:
                 return 0
 
 
+def choice_selection(num_image,mouse_pos):
+    if num_image in [3] and mouse_pos[0]<=512:
+        return 1
+    elif num_image in [3] and mouse_pos[0]>512:
+        return 2
+    return 0
+
+def image_incrementation(num_image):
+    if num_image in [4]:
+        return 2
+    return 1
