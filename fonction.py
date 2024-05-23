@@ -19,18 +19,6 @@ with open(image, "r") as image_set:
     ligne = image_set.readlines()
     tab_image = ligne[0].split(" ")
 
-class Slider:
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.knob_rect = pygame.Rect(x, y, 20, height)  # Taille fixe du knob
-
-    def draw(self, screen):
-        pygame.draw.rect(screen, (200, 200, 200), self.rect)  # Le fond du slider
-        pygame.draw.rect(screen, (100, 100, 250), self.knob_rect)  # Le knob
-
-    def update_knob_position(self, mouse_x):
-        self.knob_rect.x = max(self.rect.x, min(mouse_x, self.rect.x + self.rect.width - self.knob_rect.width))
-
 def draw(self, surface):
     pygame.draw.rect(surface, (169, 169, 169), self.rect)
     pygame.draw.rect(surface, (255, 0, 0), self.knob_rect)
@@ -62,6 +50,18 @@ class afficher_image:
         background_image = pygame.transform.scale(background_image, (window_width, window_height))
         window.blit(background_image, (0, 0))
 
+class Slider:
+    def __init__(self, x, y, width, height):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.knob_rect = pygame.Rect(x, y, 20, height)  # Taille fixe du knob
+
+    def draw(self, background_image):
+        pygame.draw.rect(background_image, (200, 200, 200), self.rect)  # Le fond du slider
+        pygame.draw.rect(background_image, (100, 100, 250), self.knob_rect)  # Le knob
+        self.draw(background_image)
+
+    def update_knob_position(self, mouse_x):
+        self.knob_rect.x = max(self.rect.x, min(mouse_x, self.rect.x + self.rect.width - self.knob_rect.width))
 
 bouton_exit = 'EarthTechProject/Image/Exit.png'
 
