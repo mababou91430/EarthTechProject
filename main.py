@@ -29,8 +29,11 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if num_image != 0:
-                num_image += 1
+            if not(num_image in [0,3]) :
+                num_image += image_incrementation(num_image)
+                test.__next__(num_image)
+            elif num_image in [3]:
+                num_image+=choice_selection(num_image,mouse_pos)
                 test.__next__(num_image)
             if pygame.MOUSEBUTTONUP:
                 menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
