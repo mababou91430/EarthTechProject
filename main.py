@@ -18,7 +18,7 @@ test = afficher_image(num_image)
 menu_option = ["Son               Retour               Quitter"]
 menu_accueil = bouton(menu_option)
 pygame.mixer.init()
-pygame.mixer.music.load('EarthTechProject/musique/Biome foret.mp3')
+pygame.mixer.music.load('musique/Biome foret.mp3')
 pygame.mixer.music.play(-1)
 
 # Boucle principale du jeu
