@@ -141,6 +141,7 @@ class bouton:
             pygame.draw.rect(surface, (255, 0, 0, 128),
                              (255, (200 + index * 50) - 10, (window_width + index * 50) // 2, 200 + index * 50))
             draw_text(item, font, BLACK, surface, ((window_width // 2) - 120), 200 + index * 50, rect)
+            pygame.draw.rect(surface,(0,0,0),(300,250,50,50))
 
     def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
         print(num_image, " , ", x, " , ", y, " , ", menu1)
@@ -162,9 +163,8 @@ class bouton:
             return 2
         elif num_image == 0 and menu1 == 0 and 300 <= x <= 420 and 770 <= y <= 800:
             return 3
-        #elif num_image == 0 and menu1 == 1 and 275 <= x <= 375 and 250 <= y <= 270:
-
-
+        elif num_image == 0 and menu1 == 1 and 300 <= x <= 350 and 250 <= y <= 300:
+            pygame.mixer.music.pause()
 
         else:
             if menu1 == 1:
