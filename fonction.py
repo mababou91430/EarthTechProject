@@ -89,6 +89,7 @@ def draw_text(text, font, color, surface, x, y, rect):
 class afficher_image:
 
     def __init__(self, num_image):
+        print("******", num_image, "*******")
         background_image = pygame.image.load(tab_image[num_image]).convert()
         background_image = pygame.transform.scale(background_image, (window_width, window_height))
         window.blit(background_image, (0, 0))
@@ -112,12 +113,16 @@ class Slider:
         self.knob_rect.x = max(self.rect.x, min(mouse_x, self.rect.x + self.rect.width - self.knob_rect.width))
 
 bouton_exit = 'EarthTechProject/Image/Exit.png'
+bouton_start = 'EarthTechProject/Image/start.png'
+bouton_option = 'EarthTechProject/Image/option.png'
 
 taille_bouton_x = 126
 taille_bouton_y = 50
 
 pos_bouton_x = (window_width - taille_bouton_x) // 2
 pos_bouton_y = window_height - 250
+
+etat_musique = 1
 
 
 class bouton:
@@ -129,10 +134,10 @@ class bouton:
         bouton_exit_image = pygame.image.load(bouton_exit).convert()
         bouton_exit_image = pygame.transform.scale(bouton_exit_image, (taille_bouton_x, taille_bouton_y))
         window.blit(bouton_exit_image, (pos_bouton_x + 150, pos_bouton_y))
-        bouton_option_image = pygame.image.load(bouton_exit).convert()
+        bouton_option_image = pygame.image.load(bouton_option).convert()
         bouton_option_image = pygame.transform.scale(bouton_option_image, (taille_bouton_x, taille_bouton_y))
         window.blit(bouton_option_image, (pos_bouton_x, pos_bouton_y))
-        bouton_start_image = pygame.image.load(bouton_exit).convert()
+        bouton_start_image = pygame.image.load(bouton_start).convert()
         bouton_start_image = pygame.transform.scale(bouton_start_image, (taille_bouton_x, taille_bouton_y))
         window.blit(bouton_start_image, (pos_bouton_x - 150, pos_bouton_y))
 
@@ -151,21 +156,28 @@ class bouton:
             menu1 += 1
             print("test2")
             return menu1
-        elif num_image == 0 and menu1 == 1 and 445 <= x <= 530 and 200 <= y <= 200 + 25:
+        elif menu1 == 1 and 445 <= x <= 530 and 200 <= y <= 200 + 25:
             print("test1")
-            afficher_image.__init__(self, 0)
-            bouton.accueil(self)
+            afficher_image.__init__(self, num_image)
+            if num_image == 0:
+                bouton.accueil(self)
             menu1 -= 1
             return menu1
-        elif num_image == 0 and menu1 == 1 and 625 <= x <= 725 and 200 <= y <= 225:
+        elif menu1 == 1 and 625 <= x <= 725 and 200 <= y <= 225:
             return 2
         elif num_image == 0 and menu1 == 0 and 600 <= x <= 725 and 770 <= y <= 800:
             return 2
         elif num_image == 0 and menu1 == 0 and 300 <= x <= 420 and 770 <= y <= 800:
             return 3
         elif num_image == 0 and menu1 == 1 and 300 <= x <= 350 and 250 <= y <= 300:
-            pygame.mixer.music.pause()
+            if etat_musique == 0:
+                pygame.mixer.music.pause()
 
+            elif etat_musique == 1:
+                pygame.mixer.music.play()
+
+
+            return 1
         else:
             if menu1 == 1:
                 return 1
