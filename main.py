@@ -24,6 +24,7 @@ pygame.mixer.music.play(-1)
 # Boucle principale du jeu
 running = True
 init = True
+choix_incrementation=[[0,0,0,0,0],[0]]#0:pouvoir foret 1:pouvoir desert 2:pouvoir eau 3:pouvoir glace 4:choix tempo 1
 
 
 while running:
@@ -32,11 +33,13 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if not(num_image in [0,3]) :
-                num_image += image_incrementation(num_image)
+            if not(num_image in [0,5]):
+                choix_incrementation=image_incrementation(num_image,choix_incrementation)
+                num_image += choix_incrementation[1]
                 test.__next__(num_image)
-            elif num_image in [3]:
-                num_image+=choice_selection(num_image,mouse_pos)
+            elif num_image in [5]:
+                choix_incrementation=choice_selection(num_image,mouse_pos,choix_incrementation)
+                num_image+=choix_incrementation[1]
                 test.__next__(num_image)
             if pygame.MOUSEBUTTONUP:
                 menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)

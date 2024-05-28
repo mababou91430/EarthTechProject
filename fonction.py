@@ -72,6 +72,7 @@ class VolumeSlider:
         pygame.draw.rect(surface, (169, 169, 169), self.rect)
         pygame.draw.rect(surface, (255, 0, 0), self.knob_rect)
 
+
 def get_volume(self):
     return self.volume / 100
 
@@ -98,6 +99,7 @@ class afficher_image:
         background_image = pygame.transform.scale(background_image, (window_width, window_height))
         window.blit(background_image, (0, 0))
 
+
 class Slider:
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -110,6 +112,7 @@ class Slider:
 
     def update_knob_position(self, mouse_x):
         self.knob_rect.x = max(self.rect.x, min(mouse_x, self.rect.x + self.rect.width - self.knob_rect.width))
+
 
 bouton_exit = 'Image/Exit.png'
 
@@ -141,7 +144,7 @@ class bouton:
             pygame.draw.rect(surface, (255, 0, 0, 128),
                              (255, (200 + index * 50) - 10, (window_width + index * 50) // 2, 200 + index * 50))
             draw_text(item, font, BLACK, surface, ((window_width // 2) - 120), 200 + index * 50, rect)
-            pygame.draw.rect(surface,(0,0,0),(300,250,50,50))
+            pygame.draw.rect(surface, (0, 0, 0), (300, 250, 50, 50))
 
     def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
         print(num_image, " , ", x, " , ", y, " , ", menu1)
@@ -173,15 +176,23 @@ class bouton:
                 return 0
 
 
-def choice_selection(num_image, mouse_pos):
-    if num_image in [3] and 15 <= mouse_pos[0] <= 340 and 440 <= mouse_pos[1] <= 590:
-        return 1
-    elif num_image in [3] and 615 <= mouse_pos[0] <= 1000 and 425 <= mouse_pos[1] <= 580:
-      return 2
-    return 0
+def choice_selection(num_image, mouse_pos, choix_incrementation):
+    if num_image in [5] and mouse_pos[0] < 510 and mouse_pos[1] >= 800:
+        choix_incrementation[0][-1]=0
+        choix_incrementation[1] = 1
+    elif num_image in [5] and 510 <= mouse_pos[0] and mouse_pos[1] >= 800:
+        choix_incrementation[0][-1]=1
+        choix_incrementation[1] = 2
+    else:
+        choix_incrementation[1] = 0
+    return choix_incrementation
 
 
-def image_incrementation(num_image):
-    if num_image in [4]:
-        return 2
-    return 1
+def image_incrementation(num_image, choix_incrementation):
+    if num_image in [6]:
+        choix_incrementation[1] = 2
+    elif num_image in [12] or (num_image in [9] and choix_incrementation[0][-1]):
+        choix_incrementation[1] = 4
+    else:
+        choix_incrementation[1] = 1
+    return choix_incrementation
