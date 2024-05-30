@@ -7,7 +7,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255, 128)
 GRAY = (150, 150, 150)
 image = 'Image.txt'
-window_width = 1020
+window_width = 800
 window_height = 1020
 
 font = pygame.font.SysFont(None, 36)
@@ -177,10 +177,10 @@ class bouton:
 
 
 def choice_selection(num_image, mouse_pos, choix_incrementation):
-    if num_image in [5] and mouse_pos[0] < 510 and mouse_pos[1] >= 800:
+    if num_image in [5] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
         choix_incrementation[0][-1]=0
         choix_incrementation[1] = 1
-    elif num_image in [5] and 510 <= mouse_pos[0] and mouse_pos[1] >= 800:
+    elif num_image in [5] and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
         choix_incrementation[0][-1]=1
         choix_incrementation[1] = 2
     else:
@@ -193,6 +193,8 @@ def image_incrementation(num_image, choix_incrementation):
         choix_incrementation[1] = 2
     elif num_image in [12] or (num_image in [9] and choix_incrementation[0][-1]):
         choix_incrementation[1] = 4
+    elif num_image == 21:
+        choix_incrementation[1] = num_image*-1
     else:
         choix_incrementation[1] = 1
     return choix_incrementation

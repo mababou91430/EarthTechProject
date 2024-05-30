@@ -36,7 +36,10 @@ while running:
             if not(num_image in [0,5]):
                 choix_incrementation=image_incrementation(num_image,choix_incrementation)
                 num_image += choix_incrementation[1]
-                test.__next__(num_image)
+                if num_image != 0:
+                    test.__next__(num_image)
+                else:
+                    init=1
             elif num_image in [5]:
                 choix_incrementation=choice_selection(num_image,mouse_pos,choix_incrementation)
                 num_image+=choix_incrementation[1]
