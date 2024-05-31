@@ -1,3 +1,4 @@
+
 import pygame
 import pygame.mixer
 
@@ -162,7 +163,7 @@ class bouton:
             if num_image == 0:
                 bouton.accueil(self)
             menu1 -= 1
-            return menu1
+            return 4
         elif menu1 == 1 and 625 <= x <= 725 and 200 <= y <= 225:
             return 2
         elif num_image == 0 and menu1 == 0 and 600 <= x <= 725 and 770 <= y <= 800:
