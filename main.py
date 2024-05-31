@@ -7,8 +7,7 @@ import sys
 num_image = 0
 menu = 0
 curseur_saisie = False
-etat_menu_option = False
-test = False
+slider = Slider(50, 100, 300, 20)
 
 window = pygame.display.set_mode((window_width, window_height))
 
@@ -25,37 +24,30 @@ pygame.mixer.music.play(-1)
 # Boucle principale du jeu
 running = True
 init = True
-choix_incrementation=[[0,0,0,0,0],[0]]#0:pouvoir foret 1:pouvoir desert 2:pouvoir eau 3:pouvoir glace 4:choix tempo 1
+choix_incrementation = [[0, 0, 0, 0, 0], [0]] #[[foret, desert, eau, glace, tempo 1], [incrementation]]
 
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN and etat_menu_option == False:
+        elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if not(num_image in [0,5]):
-                choix_incrementation=image_incrementation(num_image,choix_incrementation)
+            if not(num_image in [0,5]) :
+                choix_incrementation = image_incrementation(num_image, choix_incrementation)
                 num_image += choix_incrementation[1]
                 if num_image != 0:
                     test.__next__(num_image)
                 else:
-                    init=1
+                    init = 1
             elif num_image in [5]:
                 choix_incrementation=choice_selection(num_image,mouse_pos,choix_incrementation)
                 num_image+=choix_incrementation[1]
                 test.__next__(num_image)
             if pygame.MOUSEBUTTONUP:
                 menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
-        elif event.type == pygame.KEYDOWN:
-            etat_menu_option = True
-            menu = menu_accueil.bouton_clicker(menu_accueil, 500, 790, 0, menu, rect)
-        elif etat_menu_option == True:
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_pos = pygame.mouse.get_pos()
-                    menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
-
-
+            elif pygame.mouse.get_pressed()[0]:  # Si le bouton gauche de la souris est enfoncé
+                slider.update_knob_position(pygame.mouse.get_pos()[0])
         if menu == 2:
             running = False
         elif menu == 1:
@@ -63,10 +55,6 @@ while running:
         elif menu == 3:
             num_image += 1
             test.__next__(num_image)
-            menu = 0
-        elif menu == 4:
-            print("kiolqzidozqpd")
-            etat_menu_option == False
             menu = 0
         elif init:
             menu_accueil.__init__(menu_option)
