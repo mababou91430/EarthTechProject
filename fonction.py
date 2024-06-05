@@ -185,23 +185,25 @@ class bouton:
 
 
 def choice_selection(num_image, mouse_pos, choix_incrementation):
-    if num_image in [5] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
-        choix_incrementation[0][-1]=0
+    if num_image in [5, 25, 31] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
+        choix_incrementation[0][-1] = 0
         choix_incrementation[1] = 1
-    elif num_image in [5] and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
-        choix_incrementation[0][-1]=1
+    elif num_image in [5, 25, 31] and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
+        choix_incrementation[0][-1] = 1
         choix_incrementation[1] = 2
     else:
         choix_incrementation[1] = 0
+    if num_image == 31 and choix_incrementation[0][-1] == 0: #pouvoir foret
+        choix_incrementation[0][0] = 1
     return choix_incrementation
 
 
 def image_incrementation(num_image, choix_incrementation):
-    if num_image in [6]:
+    if num_image in [6, 26,32,33,34,35,36]:
         choix_incrementation[1] = 2
-    elif num_image in [12] or (num_image in [9] and choix_incrementation[0][-1]):
+    elif num_image in [12, 37] or (num_image in [9] and choix_incrementation[0][-1]):
         choix_incrementation[1] = 4
-    elif num_image == 21:
+    elif num_image == 41:
         choix_incrementation[1] = num_image*-1
     else:
         choix_incrementation[1] = 1
