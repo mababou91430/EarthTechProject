@@ -207,6 +207,9 @@ def choice_selection(num_image, mouse_pos, choix_incrementation):
 
 
 def image_incrementation(num_image, choix_incrementation):
+    if num_image == 44:
+        pygame.mixer.music.load('musique/Biome desert.mp3')
+        pygame.mixer.music.play(-1)
     if num_image in [6, 27, 34, 35, 36, 37, 38, 48, 49, 50, 51, 57, 58, 59]:
         choix_incrementation[1] = 2
     elif num_image in []:
@@ -219,6 +222,9 @@ def image_incrementation(num_image, choix_incrementation):
         choix_incrementation[1] = -20
     elif num_image == 69:
         choix_incrementation[1] = num_image * -1
+        pygame.mixer.music.load('musique/Biome foret.mp3')
+        pygame.mixer.music.play(-1)
+        choix_incrementation[0] = [0, 0, 0, 0, 0]
     else:
         choix_incrementation[1] = 1
     return choix_incrementation
