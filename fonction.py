@@ -72,6 +72,7 @@ class VolumeSlider:
         pygame.draw.rect(surface, (169, 169, 169), self.rect)
         pygame.draw.rect(surface, (255, 0, 0), self.knob_rect)
 
+
 def get_volume(self):
     return self.volume / 100
 
@@ -98,6 +99,7 @@ class afficher_image:
         background_image = pygame.transform.scale(background_image, (window_width, window_height))
         window.blit(background_image, (0, 0))
 
+
 class Slider:
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -110,6 +112,7 @@ class Slider:
 
     def update_knob_position(self, mouse_x):
         self.knob_rect.x = max(self.rect.x, min(mouse_x, self.rect.x + self.rect.width - self.knob_rect.width))
+
 
 bouton_exit = 'Image/Exit.png'
 bouton_start = 'Image/start.png'
@@ -175,7 +178,6 @@ class bouton:
             elif etat_musique == 1:
                 pygame.mixer.music.play()
 
-
             return 1
         else:
             if menu1 == 1:
@@ -185,26 +187,38 @@ class bouton:
 
 
 def choice_selection(num_image, mouse_pos, choix_incrementation):
-    if num_image in [5, 25, 31] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
+    if num_image in [5, 26, 33, 47, 53, 56, 61, 64] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
         choix_incrementation[0][-1] = 0
         choix_incrementation[1] = 1
-    elif num_image in [5, 25, 31] and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
+    elif num_image in [52] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
+        choix_incrementation[0][-1] = 0
+        choix_incrementation[1] = 2
+    elif (num_image in [5, 26, 33, 47] or (num_image in [61, 64]) and choix_incrementation[0][0]) and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
         choix_incrementation[0][-1] = 1
         choix_incrementation[1] = 2
+    elif num_image in [52, 53, 56] and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:  # choix partir seul
+        choix_incrementation[0][-1] = 1
+        choix_incrementation[1] = 58 - num_image
     else:
         choix_incrementation[1] = 0
-    if num_image == 31 and choix_incrementation[0][-1] == 0: #pouvoir foret
+    if num_image == 33 and choix_incrementation[0][-1] == 0:  # pouvoir foret
         choix_incrementation[0][0] = 1
     return choix_incrementation
 
 
 def image_incrementation(num_image, choix_incrementation):
-    if num_image in [6, 26,32,33,34,35,36]:
+    if num_image in [6, 27, 34, 35, 36, 37, 38, 48, 49, 50, 51, 57, 58, 59]:
         choix_incrementation[1] = 2
-    elif num_image in [12, 37] or (num_image in [9] and choix_incrementation[0][-1]):
+    elif num_image in []:
+        choix_incrementation[1] = 3
+    elif num_image in [12, 60, 63] or (num_image in [9] and choix_incrementation[0][-1]):
         choix_incrementation[1] = 4
-    elif num_image == 41:
-        choix_incrementation[1] = num_image*-1
+    elif num_image in [39, 62]:
+        choix_incrementation[1] = 5
+    elif num_image == 65:
+        choix_incrementation[1] = -20
+    elif num_image == 69:
+        choix_incrementation[1] = num_image * -1
     else:
         choix_incrementation[1] = 1
     return choix_incrementation
