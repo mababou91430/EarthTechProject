@@ -193,7 +193,7 @@ def choice_selection(num_image, mouse_pos, choix_incrementation):
         choix_incrementation[1] = 1
     elif num_image in [52] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
         choix_incrementation[1] = 2
-    elif (num_image in [5, 26, 33, 47] or (num_image in [61, 64]) and choix_incrementation[0][0]) and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
+    elif (num_image in [5, 26, 33, 47] or (num_image in [61, 64] and choix_incrementation[0][0])) and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:
         if num_image in [5]:
             choix_incrementation[0][-1] = 1
         choix_incrementation[1] = 2
