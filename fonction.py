@@ -167,9 +167,9 @@ class bouton:
             return 4
         elif menu1 == 1 and 490 <= x <= 569 and 200 <= y <= 225:
             return 2
-        elif num_image == 0 and menu1 == 0 and 485 <= x <= 615 and 770 <= y <= 800:
+        elif num_image == 0 and menu1 == 0 and 485 <= x <= 615 and 770 <= y <= 825:
             return 2
-        elif num_image == 0 and menu1 == 0 and 180 <= x <= 315 and 770 <= y <= 800:
+        elif num_image == 0 and menu1 == 0 and 180 <= x <= 315 and 770 <= y <= 825:
             return 3
         elif num_image == 0 and menu1 == 1 and 235 <= x <= 275 and 250 <= y <= 300:
             if etat_musique == 0:
