@@ -41,7 +41,7 @@ while running:
                 else:
                     init = 1
             elif num_image in [5, 26, 33, 47, 52, 53, 56, 61, 64]:
-                choix_incrementation=choice_selection(num_image,mouse_pos,choix_incrementation)
+                choix_incrementation = choice_selection(num_image,mouse_pos,choix_incrementation)
                 num_image += choix_incrementation[1]
                 test.__next__(num_image)
             if pygame.MOUSEBUTTONUP:
