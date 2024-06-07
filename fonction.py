@@ -190,6 +190,8 @@ def choice_selection(num_image, mouse_pos, choix_incrementation):
     if num_image in [5, 26, 33, 47, 53, 56, 61, 64] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
         if num_image in []:
             choix_incrementation[0][-1] = 0
+        elif num_image == 33:  # pouvoir foret
+            choix_incrementation[0][0] = 1
         choix_incrementation[1] = 1
     elif num_image in [52] and mouse_pos[0] < 400 and mouse_pos[1] >= 800:
         if num_image in []:
@@ -205,8 +207,6 @@ def choice_selection(num_image, mouse_pos, choix_incrementation):
         choix_incrementation[1] = 58 - num_image
     else:
         choix_incrementation[1] = 0
-    if num_image == 33 and choix_incrementation[0][-1] == 0:  # pouvoir foret
-        choix_incrementation[0][0] = 1
     return choix_incrementation
 
 
