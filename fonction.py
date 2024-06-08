@@ -6,6 +6,7 @@ pygame.font.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255, 128)
 GRAY = (150, 150, 150)
+RED = (255,0,0)
 image = 'Image.txt'
 window_width = 800
 window_height = 1020
@@ -20,65 +21,7 @@ with open(image, "r") as image_set:
     tab_image = ligne[0].split(" ")
 
 
-class Game:
-    def __init__(self):
-        self.screen = window
-        self.clock = pygame.time.Clock()
-        self.running = True
-
-        # Charger la musique
-        self.music_path = "musique/Falling In Reverse - Ronald.mp3"
-        pygame.mixer.music.load(self.music_path)
-        pygame.mixer.music.play(-1)  # Joue la musique en boucle
-
-        # Créer le curseur de volume
-        self.volume_slider = VolumeSlider(275, 250, 100, 20)
-
-    def run(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
-            self.volume_slider.handle_event(event)
-
-        # Mettre à jour le volume de la musique
-        pygame.mixer.music.set_volume(self.volume_slider.get_volume())
-
-        # Dessiner
-        self.volume_slider.draw(self.screen)
-        pygame.display.flip()
-        self.clock.tick(60)
-
-
-class VolumeSlider:
-    def __init__(self, x, y, width, height, initial_volume=20):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.volume = initial_volume
-        self.knob_rect = pygame.Rect(x + (initial_volume / 100) * width, y, 10, height)
-        self.dragging = False
-
-    def handle_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.knob_rect.collidepoint(event.pos):
-                self.dragging = True
-        elif event.type == pygame.MOUSEBUTTONUP:
-            self.dragging = False
-        elif event.type == pygame.MOUSEMOTION:
-            if self.dragging:
-                self.knob_rect.x = min(max(self.rect.x, event.pos[0]),
-                                       self.rect.x + self.rect.width - self.knob_rect.width)
-                self.volume = ((self.knob_rect.x - self.rect.x) / self.rect.width) * 100
-
-    def draw(self, surface):
-        pygame.draw.rect(surface, (169, 169, 169), self.rect)
-        pygame.draw.rect(surface, (255, 0, 0), self.knob_rect)
-
-
-def get_volume(self):
-    return self.volume / 100
-
-
 def draw_text(text, font, color, surface, x, y, rect):
-    pygame.draw.rect(surface, GRAY, (x - 5 - 90, y, 55, 25))
     pygame.draw.rect(surface, GRAY, (x + 55, y, 85, 25))
     pygame.draw.rect(surface, GRAY, (x + 145 + 90, y, 100, 25))
     text_obj = font.render(text, True, color)
@@ -100,20 +43,6 @@ class afficher_image:
         window.blit(background_image, (0, 0))
 
 
-class Slider:
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.knob_rect = pygame.Rect(x, y, 20, height)  # Taille fixe du knob
-
-    def draw(self, background_image):
-        pygame.draw.rect(background_image, (200, 200, 200), self.rect)  # Le fond du slider
-        pygame.draw.rect(background_image, (100, 100, 250), self.knob_rect)  # Le knob
-        self.draw(background_image)
-
-    def update_knob_position(self, mouse_x):
-        self.knob_rect.x = max(self.rect.x, min(mouse_x, self.rect.x + self.rect.width - self.knob_rect.width))
-
-
 bouton_exit = 'Image/Exit.png'
 bouton_start = 'Image/start.png'
 bouton_option = 'Image/option.png'
@@ -126,6 +55,34 @@ pos_bouton_y = window_height - 250
 
 etat_musique = 1
 
+class Slider:
+    def __init__(self, x, y, w, h, min_val, max_val, step, default_val):
+        self.rect = pygame.Rect(x, y, w, h)
+        self.min_val = min_val
+        self.max_val = max_val
+        self.step = step
+        self.value = default_val
+        self.handle_rect = pygame.Rect(x + int((default_val - min_val) / (max_val - min_val) * (w - w // 20)), y, w // 20, h)
+        self.dragging = False
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, BLACK, self.rect)
+        pygame.draw.rect(screen, WHITE, self.handle_rect)
+
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.handle_rect.collidepoint(event.pos):
+                self.dragging = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.dragging = False
+        elif event.type == pygame.MOUSEMOTION:
+            if self.dragging:
+                self.handle_rect.x = max(self.rect.x, min(event.pos[0] - self.handle_rect.width // 2, self.rect.x + self.rect.width - self.handle_rect.width))
+                self.value = self.min_val + ((self.handle_rect.x - self.rect.x) / (self.rect.width - self.handle_rect.width)) * (self.max_val - self.min_val)
+                self.value = round(self.value / self.step) * self.step  # Arrondir à la valeur la plus proche du pas
+
+    def get_value(self):
+        return self.value
 
 class bouton:
 
@@ -146,9 +103,8 @@ class bouton:
     def draw(self, surface, rect):
         for index, item in enumerate(self.items):
             pygame.draw.rect(surface, (255, 0, 0, 128),
-                             (255, (200 + index * 50) - 10, (window_width + index * 50) // 2, 200 + index * 50))
+                             (150, 200-15, 500, 200 + index * 50))
             draw_text(item, font, BLACK, surface, ((window_width // 2) - 120), 200 + index * 50, rect)
-            pygame.draw.rect(surface, (0, 0, 0), (300, 250, 50, 50))
 
     def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
         print(num_image, " , ", x, " , ", y, " , ", menu1)
@@ -171,14 +127,6 @@ class bouton:
             return 2
         elif num_image == 0 and menu1 == 0 and 180 <= x <= 315 and 770 <= y <= 800:
             return 3
-        elif num_image == 0 and menu1 == 1 and 235 <= x <= 275 and 250 <= y <= 300:
-            if etat_musique == 0:
-                pygame.mixer.music.pause()
-
-            elif etat_musique == 1:
-                pygame.mixer.music.play()
-
-            return 1
         else:
             if menu1 == 1:
                 return 1
