@@ -33,7 +33,7 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if not(num_image in [0, 5, 26, 33, 48, 54, 55, 59, 64, 67]):
+            if not(num_image in [0, 5, 26, 33, 48, 54, 55, 59, 64, 67, 74]):
                 choix_incrementation = image_incrementation(num_image, choix_incrementation)
                 num_image += choix_incrementation[1]
                 if num_image != 0:
