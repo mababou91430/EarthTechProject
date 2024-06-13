@@ -104,7 +104,7 @@ class bouton:
     def draw(self, surface, rect):
         for index, item in enumerate(self.items):
             pygame.draw.rect(surface, BROWN,
-                             (150, 200-15, 500, 300))
+                             (150, 200-15, 500, 130))
             draw_text(item, font, BLACK, surface, ((window_width // 2) - 120), 200 + index * 50, rect)
 
     def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
