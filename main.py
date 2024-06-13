@@ -17,7 +17,7 @@ test = afficher_image(num_image)
 menu_option = ["                     Retour               Quitter"]
 menu_accueil = bouton(menu_option)
 pygame.mixer.init()
-pygame.mixer.music.load('musique/Biome foret.mp3')
+pygame.mixer.music.load('musique/Glace.mp3')
 pygame.mixer.music.play(-1)
 
 
@@ -37,14 +37,14 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
-            if not(num_image in [0, 5, 26, 33, 47, 52, 53, 56, 61, 64]):
+            if not(num_image in [0, 5, 26, 33, 48, 54, 55, 59, 64, 67, 74, 82, 89, 92]):
                 choix_incrementation = image_incrementation(num_image, choix_incrementation)
                 num_image += choix_incrementation[1]
                 if num_image != 0:
                     test.__next__(num_image)
                 else:
                     init = 1
-            elif num_image in [5, 26, 33, 47, 52, 53, 56, 61, 64]:
+            elif num_image != 0:
                 choix_incrementation = choice_selection(num_image,mouse_pos,choix_incrementation)
                 num_image += choix_incrementation[1]
                 test.__next__(num_image)
@@ -65,6 +65,8 @@ while running:
         elif menu == 3:
             num_image += 1
             test.__next__(num_image)
+            pygame.mixer.music.load('musique/Biome foret.mp3')
+            pygame.mixer.music.play(-1)
             menu = 0
         elif init:
             menu_accueil.__init__(menu_option)
