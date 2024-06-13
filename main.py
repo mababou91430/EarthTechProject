@@ -17,7 +17,7 @@ test = afficher_image(num_image)
 menu_option = ["                     Retour               Quitter"]
 menu_accueil = bouton(menu_option)
 pygame.mixer.init()
-pygame.mixer.music.load('musique/Biome foret.mp3')
+pygame.mixer.music.load('musique/Glace.mp3')
 pygame.mixer.music.play(-1)
 
 
@@ -65,6 +65,8 @@ while running:
         elif menu == 3:
             num_image += 1
             test.__next__(num_image)
+            pygame.mixer.music.load('musique/Biome foret.mp3')
+            pygame.mixer.music.play(-1)
             menu = 0
         elif init:
             menu_accueil.__init__(menu_option)

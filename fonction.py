@@ -146,7 +146,7 @@ def choice_selection(num_image, mouse_pos, choix_incrementation):
     elif ((num_image in [5, 26, 33, 48, 74, 82, 89, 92] or (num_image in [64, 67] and choix_incrementation[0][0])) and 400 <= mouse_pos[0] and mouse_pos[1] >= 800) or ((num_image in [54] or (num_image in [82] and not (choix_incrementation[0][-1]))) and mouse_pos[0] < 400 and mouse_pos[1] >= 800):
         if num_image in [5, 74] or (num_image in [82] and mouse_pos[0] < 400 and mouse_pos[1] >= 800):
             choix_incrementation[0][-1] = 1
-        elif num_image in [82] :
+        elif num_image in [82]:
             choix_incrementation[0][-1] = 0
         choix_incrementation[1] = 2
     elif num_image in [54, 55, 59] and 400 <= mouse_pos[0] and mouse_pos[1] >= 800:  # choix partir seul
@@ -160,20 +160,21 @@ def image_incrementation(num_image, choix_incrementation):
     if num_image == 44:
         pygame.mixer.music.load('musique/Biome desert.mp3')
         pygame.mixer.music.play(-1)
-    if num_image in [6, 27, 34, 35, 36, 37, 38, 49, 50, 51, 52, 53, 62, 69, 70, 86, 87, 93] or (num_image in [85] and not(choix_incrementation[0][-1])):
+    elif num_image in [91, 94, 99]:
+        pygame.mixer.music.load('musique/Musique Eau.mp3')
+        pygame.mixer.music.play(-1)
+    if num_image in [6, 27, 34, 35, 36, 37, 38, 49, 50, 51, 52, 53, 62, 69, 70, 86, 87, 93, 94, 97] or (num_image in [85, 95] and not(choix_incrementation[0][-1])):
         choix_incrementation[1] = 2
-    elif num_image in [60]:
+    elif num_image in [60, 95]:
         choix_incrementation[1] = 3
     elif num_image in [12, 63, 66, 68, 75, 88] or (num_image in [9] and choix_incrementation[0][-1]):
         choix_incrementation[1] = 4
-    elif num_image in [39, 90]:
+    elif num_image in [39, 90, 91]:
         choix_incrementation[1] = 5
     elif num_image == 65:
         choix_incrementation[1] = -20
-    elif num_image == 95:
+    elif num_image in [96, 100]:
         choix_incrementation[1] = num_image * -1
-        pygame.mixer.music.load('musique/Biome foret.mp3')
-        pygame.mixer.music.play(-1)
         choix_incrementation[0] = [0, 0, 0, 0, 0]
     else:
         choix_incrementation[1] = 1
