@@ -107,7 +107,6 @@ class bouton:
             draw_text(item, font, BLACK, surface, ((window_width // 2) - 120), 200 + index * 50, rect)
 
     def bouton_clicker(self, menu_accueil, x, y, num_image, menu1, rect):
-        print(num_image, " , ", x, " , ", y, " , ", menu1)
         if (num_image == 0 and pos_bouton_x <= x <= 465 and pos_bouton_y <= y <= pos_bouton_y + 50
                 and menu1 == 0):
             menu_accueil.draw(window, rect)
