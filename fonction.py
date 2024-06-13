@@ -6,7 +6,8 @@ pygame.font.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255, 128)
 GRAY = (150, 150, 150)
-RED = (255,0,0)
+RED = (255, 0, 0)
+BROWN = (150, 75, 0)
 image = 'Image.txt'
 window_width = 800
 window_height = 1020
@@ -102,7 +103,7 @@ class bouton:
 
     def draw(self, surface, rect):
         for index, item in enumerate(self.items):
-            pygame.draw.rect(surface, (255, 0, 0, 128),
+            pygame.draw.rect(surface, BROWN,
                              (150, 200-15, 500, 200 + index * 50))
             draw_text(item, font, BLACK, surface, ((window_width // 2) - 120), 200 + index * 50, rect)
 
