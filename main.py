@@ -7,7 +7,6 @@ import sys
 num_image = 0
 menu = 0
 curseur_saisie = False
-slider = Slider(50, 100, 300, 20)
 
 window = pygame.display.set_mode((window_width, window_height))
 
@@ -15,20 +14,25 @@ window = pygame.display.set_mode((window_width, window_height))
 pygame.init()
 pygame.font.init()
 test = afficher_image(num_image)
-menu_option = ["Son               Retour               Quitter"]
+menu_option = ["                     Retour               Quitter"]
 menu_accueil = bouton(menu_option)
 pygame.mixer.init()
 pygame.mixer.music.load('musique/Biome foret.mp3')
 pygame.mixer.music.play(-1)
 
+
 # Boucle principale du jeu
 running = True
 init = True
 choix_incrementation = [[0, 0, 0, 0, 0], [0]] #[[foret, desert, eau, glace, tempo 1], [incrementation]]
+volume_defaut = 0.5
+volume_slider = Slider(180, 240, 100, 20, 0, 1, 0.01, volume_defaut)
 
+pygame.mixer.music.set_volume(volume_defaut)
 
 while running:
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -46,12 +50,18 @@ while running:
                 test.__next__(num_image)
             if pygame.MOUSEBUTTONUP:
                 menu = menu_accueil.bouton_clicker(menu_accueil, mouse_pos[0], mouse_pos[1], num_image, menu, rect)
-            elif pygame.mouse.get_pressed()[0]:  # Si le bouton gauche de la souris est enfoncé
-                slider.update_knob_position(pygame.mouse.get_pos()[0])
         if menu == 2:
             running = False
         elif menu == 1:
             menu_accueil.draw(window, rect)
+            volume_slider.handle_event(event)
+            volume_slider.draw(window)
+            font = pygame.font.Font(None, 36)
+            pygame.draw.rect(window,GRAY,(160,200,150,25))
+            text = font.render(f'Volume: {int(volume_slider.get_value()*100)}', True, BLACK)
+            window.blit(text, (165, 200))
+            pygame.mixer.music.set_volume(volume_slider.get_value())
+
         elif menu == 3:
             num_image += 1
             test.__next__(num_image)
